@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRXQA Studio | Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #030303;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #fff, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: white; border-bottom: 1px solid white; padding-bottom: 4px; }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 8rem 2rem 5rem;
+    }
+    .contact-card {
+      background: #0a0a0e;
+      border-radius: 32px;
+      padding: 2.5rem;
+      border: 1px solid #1f1f2a;
+      margin-top: 1rem;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      border-left: 4px solid #ffffff;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    .contact-text {
+      font-size: 1rem;
+      color: #bcbcbc;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+    .platform-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .platform-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #1e1e26;
+      transition: 0.2s;
+    }
+    .platform-item i {
+      width: 32px;
+      font-size: 1.7rem;
+      color: #bbc0ff;
+    }
+    .platform-item a {
+      color: #f0f0f0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .platform-item a:hover {
+      color: white;
+      text-decoration: underline;
+      margin-left: 4px;
+    }
+    .small-note {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #6c6c77;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #4a4a4a;
+      border-top: 1px solid #141414;
+    }
+    @media (max-width: 760px) {
+      .navbar { padding: 1rem 1.2rem; }
+      .container { padding: 6rem 1.5rem 3rem; }
+      .contact-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">HRXQA STUDIO</div>
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="project.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="section-title">Contact HRXQA Studio</h1>
+  <div class="contact-card">
+    <p class="contact-text">For collaborations, freelance work, or inquiries, contact us through the platforms below.</p>
+    <div class="platform-list">
+      <div class="platform-item"><i class="fab fa-instagram"></i> <a href="https://instagram.com/hrxqastudio" target="_blank">@hrxqastudio</a></div>
+      <div class="platform-item"><i class="fab fa-youtube"></i> <a href="https://youtube.com/@hrxqastudio" target="_blank">hrxqastudio</a></div>
+      <div class="platform-item"><i class="fab fa-artstation"></i> <a href="https://artstation.com/hrxqastudio" target="_blank">hrxqastudio</a></div>
+      <div class="platform-item"><i class="fab fa-tiktok"></i> <a href="https://tiktok.com/@hrxqastudio" target="_blank">@hrxqastudio</a></div>
+      <div class="platform-item"><i class="fas fa-envelope"></i> <a href="mailto:hrxqastudio@hrxqa.com">hrxqastudio@hrxqa.com</a></div>
+    </div>
+    <div class="small-note">✦ Available for new projects — let's create something cinematic.</div>
+  </div>
+</div>
+
+<footer>
+  <span>HRXQA Studio — cinematic 3D & visual narratives</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HRXQA Studio | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #030303;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #fff, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: white; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 4px; }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, #0b0b1a 0%, #010101 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 880px;
+      margin: 0 2rem;
+      animation: fadeUp 1s ease-out;
+    }
+    .hero-content h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFFFFF, #B0BEC5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: #cdcdcd;
+      margin: 0.5rem 0 1.8rem 0;
+    }
+    .hero-description {
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto;
+      color: #bbbbbb;
+      line-height: 1.6;
+      border-left: 2px solid #3f3f46;
+      padding-left: 1.5rem;
+      text-align: left;
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #4a4a4a;
+      border-top: 1px solid #141414;
+    }
+    @media (max-width: 760px) {
+      .navbar { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">HRXQA STUDIO</div>
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="project.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <h1>HRXQA Studio</h1>
+    <div class="hero-sub">3D Artist • Visual Creator • Animation Studio</div>
+    <div class="hero-description">
+      HRXQA Studio is a personal 3D creative space focused on modeling, animation, and cinematic visual storytelling. 
+      We create digital worlds, characters, and high-quality renders with a strong visual identity.
+    </div>
+  </div>
+</section>
+<footer>
+  <span>HRXQA Studio — cinematic 3D & visual narratives</span>
+</footer>
+
+<script>
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    let ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const PARTICLE_COUNT = 80;
+
+    class Particle {
+      constructor(x, y, radius, speedX, speedY, color) {
+        this.x = x; this.y = y; this.radius = radius;
+        this.speedX = speedX; this.speedY = speedY; this.color = color;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = `rgba(100, 150, 255, 0.4)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < -30) this.x = width + 30;
+        if (this.x > width + 30) this.x = -30;
+        if (this.y < -30) this.y = height + 30;
+        if (this.y > height + 30) this.y = -30;
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        let radius = Math.random() * 2.2 + 0.8;
+        let x = Math.random() * width;
+        let y = Math.random() * height;
+        let speedX = (Math.random() - 0.5) * 0.35;
+        let speedY = (Math.random() - 0.5) * 0.3;
+        let alpha = Math.random() * 0.5 + 0.2;
+        let color = `rgba(140, 190, 255, ${alpha})`;
+        particles.push(new Particle(x, y, radius, speedX, speedY, color));
+      }
+      for (let i = 0; i < 30; i++) {
+        let radius = Math.random() * 3.5 + 1;
+        let x = Math.random() * width;
+        let y = Math.random() * height;
+        let speedX = (Math.random() - 0.5) * 0.2;
+        let speedY = (Math.random() - 0.5) * 0.2;
+        let color = `rgba(200, 210, 255, ${Math.random() * 0.3 + 0.1})`;
+        particles.push(new Particle(x, y, radius, speedX, speedY, color));
+      }
+    }
+
+    function drawBackground() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#02020A';
+      ctx.fillRect(0, 0, width, height);
+      for (let p of particles) {
+        p.draw();
+        p.update();
+      }
+      requestAnimationFrame(drawBackground);
+    }
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      initParticles();
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawBackground();
+  })();
+</script>
+</body>
+</html>

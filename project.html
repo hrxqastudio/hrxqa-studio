@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRXQA Studio | Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #050505;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #fff, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: white; border-bottom: 1px solid white; padding-bottom: 4px; }
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 8rem 2rem 5rem;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      border-left: 4px solid #ffffff;
+      padding-left: 1rem;
+      margin-bottom: 3rem;
+    }
+    .empty-state {
+      text-align: center;
+      background: rgba(15, 15, 20, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 48px;
+      padding: 4rem 2rem;
+      border: 1px solid #2a2a2a;
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+    .empty-icon {
+      font-size: 4.5rem;
+      color: #4a4a5a;
+      margin-bottom: 1.5rem;
+    }
+    .empty-state h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #ccc, #aaa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .empty-state p {
+      font-size: 1.05rem;
+      color: #a0a0b0;
+      line-height: 1.5;
+    }
+    .empty-note {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: #6f6f7f;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #4a4a4a;
+      border-top: 1px solid #141414;
+    }
+    @media (max-width: 760px) {
+      .navbar { padding: 1rem 1.2rem; }
+      .container { padding: 6rem 1.5rem 3rem; }
+      .empty-state { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">HRXQA STUDIO</div>
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="project.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="section-title">Our Work</h1>
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-folder-open"></i></div>
+    <h2>There is no project</h2>
+    <p>The studio’s portfolio is currently empty. <br> New cinematic works, characters and environments will appear soon.</p>
+    <div class="empty-note">✦ HRXQA Studio — preparing visual stories ✦</div>
+  </div>
+</div>
+
+<footer>
+  <span>HRXQA Studio — cinematic 3D & visual narratives</span>
+</footer>
+</body>
+</html>
