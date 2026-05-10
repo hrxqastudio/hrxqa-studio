@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRXQA Studio | Apply</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #030303;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #fff, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: white; border-bottom: 1px solid white; padding-bottom: 4px; }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+    .apply-header {
+      margin-bottom: 2rem;
+    }
+    .apply-header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      border-left: 4px solid #ffffff;
+      padding-left: 1rem;
+    }
+    .apply-header p {
+      color: #aaa;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+    }
+    form {
+      background: #0a0a0e;
+      border-radius: 32px;
+      padding: 2rem 2rem 2.5rem;
+      border: 1px solid #1f1f2a;
+    }
+    .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #20202a;
+    }
+    .form-section h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: #e0e0ff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .form-section h2 i {
+      font-size: 1.3rem;
+      color: #8f9eff;
+    }
+    .form-row {
+      margin-bottom: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: #cfcfcf;
+      letter-spacing: 0.3px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: #13131a;
+      border: 1px solid #2a2a34;
+      border-radius: 16px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #8f9eff;
+      background: #181822;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .helper-text {
+      font-size: 0.7rem;
+      color: #7a7a8a;
+      margin-top: 0.3rem;
+    }
+    .inline-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .file-input {
+      padding: 0.5rem 0;
+    }
+    button {
+      background: linear-gradient(135deg, #2a2a3a, #14141e);
+      border: 1px solid #4a4a5a;
+      color: white;
+      padding: 1rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.25s;
+      margin-top: 1rem;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+    button:hover {
+      background: #2e2e42;
+      border-color: #8f9eff;
+      transform: scale(0.98);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #4a4a4a;
+      border-top: 1px solid #141414;
+    }
+    @media (max-width: 760px) {
+      .navbar { padding: 1rem 1.2rem; }
+      .container { padding: 6rem 1.2rem 3rem; }
+      form { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">HRXQA STUDIO</div>
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="project.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+    <a href="apply.html" style="background: rgba(255,255,255,0.08); padding: 0.3rem 0.8rem; border-radius: 40px;">APPLY</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="apply-header">
+    <h1>Join HRXQA Studio</h1>
+    <p>We're looking for passionate 3D artists, animators, modelers, and visual storytellers. Fill out the form below.</p>
+  </div>
+
+  <form id="applicationForm" action="#" method="post" enctype="multipart/form-data">
+    <!-- Basic Information -->
+    <div class="form-section">
+      <h2><i class="fas fa-user-edit"></i> 🧾 Basic Information</h2>
+      <div class="form-row">
+        <div class="form-group"><label>Full name *</label><input type="text" name="fullname" required></div>
+        <div class="form-group"><label>Email address *</label><input type="email" name="email" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Country / Timezone</label><input type="text" name="country" placeholder="e.g., USA / EST"></div>
+        <div class="form-group"><label>Age (optional)</label><input type="number" name="age"></div>
+      </div>
+      <div class="form-group"><label>Portfolio / Website / ArtStation / Behance link *</label><input type="url" name="portfolio" required></div>
+    </div>
+
+    <!-- Skills & Role -->
+    <div class="form-section">
+      <h2><i class="fas fa-brush"></i> 🎨 Skills & Role</h2>
+      <div class="form-row">
+        <div class="form-group"><label>What role are you applying for? *</label><input type="text" name="role" placeholder="3D Artist, Animator, Modeler, VFX..." required></div>
+        <div class="form-group"><label>Software you use *</label><input type="text" name="software" placeholder="Blender, Maya, ZBrush, Unreal..."></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Years of experience in 3D</label><input type="text" name="years"></div>
+        <div class="form-group"><label>Your strongest skill</label><input type="text" name="strongest" placeholder="Modeling, animation, texturing, lighting..."></div>
+      </div>
+    </div>
+
+    <!-- Experience & Work -->
+    <div class="form-section">
+      <h2><i class="fas fa-briefcase"></i> 💼 Experience & Work</h2>
+      <div class="form-group"><label>Show us 2–5 of your best projects (links or upload images)</label>
+        <input type="text" name="project_links" placeholder="Paste ArtStation/Drive/Imgur links">
+        <div class="helper-text">Or upload images (optional, max 5 files):</div>
+        <input type="file" name="project_files" multiple accept="image/*">
+      </div>
+      <div class="form-group"><label>Have you worked on team projects before? Describe your role</label><textarea name="team_experience"></textarea></div>
+      <div class="form-group"><label>Have you ever worked on a film, game, or studio production?</label><textarea name="production"></textarea></div>
+    </div>
+
+    <!-- Creative Thinking -->
+    <div class="form-section">
+      <h2><i class="fas fa-lightbulb"></i> 🧠 Creative Thinking</h2>
+      <div class="form-group"><label>Describe your art style in 1–2 sentences</label><textarea name="art_style"></textarea></div>
+      <div class="form-group"><label>What inspires your work?</label><textarea name="inspiration"></textarea></div>
+      <div class="form-group"><label>If we give you a concept, how do you approach building a scene from start to finish?</label><textarea name="approach"></textarea></div>
+    </div>
+
+    <!-- Technical & Workflow -->
+    <div class="form-section">
+      <h2><i class="fas fa-cogs"></i> ⚙️ Technical & Workflow</h2>
+      <div class="form-group"><label>Typical workflow from idea → final render</label><textarea name="workflow"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>Render engine you use</label><input type="text" name="render_engine" placeholder="Cycles, Arnold, Redshift..."></div>
+        <div class="form-group"><label>Can you work with deadlines?</label><input type="text" name="deadlines" placeholder="Yes/No + explanation"></div>
+      </div>
+    </div>
+
+    <!-- Collaboration -->
+    <div class="form-section">
+      <h2><i class="fas fa-users"></i> 🤝 Collaboration</h2>
+      <div class="form-group"><label>Are you comfortable working in a team remotely?</label><input type="text" name="remote_team" placeholder="Yes / No + details"></div>
+      <div class="form-group"><label>How do you handle feedback or revisions?</label><textarea name="feedback"></textarea></div>
+      <div class="form-group"><label>What time per week can you dedicate to projects?</label><input type="text" name="weekly_hours"></div>
+    </div>
+
+    <!-- Optional (very useful) -->
+    <div class="form-section">
+      <h2><i class="fas fa-film"></i> 🎬 Optional (But useful)</h2>
+      <div class="form-group"><label>Can you do animation + modeling, or only one?</label><input type="text" name="animation_modeling"></div>
+      <div class="form-group"><label>Do you have experience with cinematic storytelling?</label><textarea name="cinematic"></textarea></div>
+      <div class="form-group"><label>Can you create assets optimized for games or real-time engines?</label><input type="text" name="optimized_assets"></div>
+    </div>
+
+    <!-- Final Question -->
+    <div class="form-section">
+      <h2><i class="fas fa-star"></i> 🧾 Final Question</h2>
+      <div class="form-group"><label>Why do you want to join HRXQA Studio?</label><textarea name="why_join" rows="3"></textarea></div>
+    </div>
+
+    <!-- Extra high-quality filter -->
+    <div class="form-section">
+      <h2><i class="fas fa-hourglass-half"></i> ⭐ Extra (high-quality filter)</h2>
+      <div class="form-group"><label>If we give you a 3D scene concept today, how long would it take you to produce a first draft?</label><input type="text" name="first_draft_time" placeholder="e.g., 2 days, 8 hours..."></div>
+    </div>
+
+    <button type="submit">✨ SUBMIT APPLICATION ✨</button>
+    <div class="helper-text" style="text-align:center; margin-top:1rem;">(Demo: your application will be shown in console. This is a static frontend prototype.)</div>
+  </form>
+</div>
+
+<footer>
+  <span>All rights reserved © 2026 HRXQA Studio</span>
+</footer>
+
+<script>
+  document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    let output = "📩 HRXQA Studio Application\n\n";
+    for (let [key, value] of formData.entries()) {
+      if (value instanceof File && value.name) {
+        output += `${key}: ${value.name} (file)\n`;
+      } else if (value) {
+        output += `${key}: ${value}\n`;
+      }
+    }
+    console.log(output);
+    alert("Application received! (Demo) Our team will review your submission. Thank you for your interest in HRXQA Studio.");
+    // Optionally reset form
+    // this.reset();
+  });
+</script>
+</body>
+</html>
