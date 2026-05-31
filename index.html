@@ -2,225 +2,766 @@
 <html lang="en">
 <head>
   <meta name="google-site-verification" content="D116rIcvncHnWEJ4tQ0697CJjeH6apjDYNpzoUCf0aw" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>HRXQA Studio | Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #030303;
-      color: #ededed;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(0, 0, 0, 0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #fff, #b0b0b0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 1px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links a {
-      color: #e0e0e0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-    .nav-links a:hover { color: white; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 4px; }
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at center, #0b0b1a 0%, #010101 100%);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 880px;
-      margin: 0 2rem;
-      animation: fadeUp 1s ease-out;
-    }
-    .hero-content h1 {
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 700;
-      background: linear-gradient(135deg, #FFFFFF, #B0BEC5);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-sub {
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      color: #cdcdcd;
-      margin: 0.5rem 0 1.8rem 0;
-    }
-    .hero-description {
-      font-size: 1.05rem;
-      max-width: 620px;
-      margin: 0 auto;
-      color: #bbbbbb;
-      line-height: 1.6;
-      border-left: 2px solid #3f3f46;
-      padding-left: 1.5rem;
-      text-align: left;
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.75rem;
-      color: #4a4a4a;
-      border-top: 1px solid #141414;
-    }
-    @media (max-width: 760px) {
-      .navbar { padding: 1rem 1.2rem; }
-      .nav-links { gap: 1.2rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>HRXQA Studio | Cinematic 3D Animation & VFX — Black & White</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Three.js Core -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            font-family: 'Inter', sans-serif;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll - monochrome */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555555;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #aaaaaa;
+        }
+
+        /* loading screen black & white */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 1.1s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+        }
+        .loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #ffffff, #aaaaaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulseBW 1.6s infinite alternate;
+        }
+        .loader-bar {
+            width: 180px;
+            height: 2px;
+            background: #222222;
+            margin-top: 28px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #cccccc, #ffffff);
+            animation: loadProgress 1.4s ease forwards;
+        }
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        @keyframes pulseBW {
+            0% { text-shadow: 0 0 2px rgba(255,255,255,0.2); opacity: 0.8; }
+            100% { text-shadow: 0 0 18px rgba(255,255,255,0.5); opacity: 1; }
+        }
+
+        /* main container */
+        .app {
+            position: relative;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(14px);
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+        }
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(120deg, #ffffff, #b0b0b0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links li {
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #dddddd;
+        }
+        .nav-links li:hover, .nav-links li.active {
+            color: #ffffff;
+            text-shadow: 0 0 6px rgba(255,255,255,0.5);
+        }
+        .mobile-menu {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        /* page containers */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.45s ease, transform 0.4s ease;
+        }
+        .page.active-page {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hero section - black/white */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        #three-canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.1);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 5.6rem;
+            font-weight: 800;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #FFFFFF, #bebebe, #888888);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .hero-sub {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #bbbbbb;
+            margin-bottom: 2rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.25s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 14px rgba(255,255,255,0.15);
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: #e0e0e0;
+            box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+        }
+        .btn-outline {
+            border: 1px solid #6a6a6a;
+            color: #f0f0f0;
+            background: transparent;
+            backdrop-filter: blur(4px);
+        }
+        .btn-outline:hover {
+            border-color: #ffffff;
+            background: rgba(255,255,255,0.08);
+        }
+        /* sections */
+        .section-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            margin-bottom: 2rem;
+            border-left: 5px solid #aaaaaa;
+            padding-left: 1.5rem;
+            color: #ffffff;
+        }
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #c0c0c0;
+            max-width: 800px;
+        }
+        .featured-grid {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .feat-card {
+            flex: 1;
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .feat-card:hover {
+            transform: scale(1.02) translateY(-8px);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.8);
+        }
+        .feat-img {
+            height: 220px;
+            background: #0a0a0a;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #cccccc;
+        }
+        .feat-card h3 {
+            margin: 1rem 1rem 0.5rem;
+            font-weight: 600;
+            color: #f5f5f5;
+        }
+        .feat-card p {
+            margin: 0 1rem 1.5rem;
+            color: #9e9e9e;
+            font-size: 0.9rem;
+        }
+
+        /* Projects (Studio Productions) - monochrome */
+        .project-block {
+            margin-bottom: 6rem;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+        .project-title {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            color: #ffffff;
+        }
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            margin: 0.8rem 0 1.5rem;
+            font-size: 0.9rem;
+            color: #adadad;
+        }
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .break-item {
+            background: #0c0c0c;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border-left: 3px solid #a0a0a0;
+        }
+        .break-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #efefef;
+        }
+        .img-mock {
+            background: #121212;
+            border-radius: 12px;
+            height: 120px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7a7a7a;
+            font-size: 0.8rem;
+            border: 1px solid #2c2c2c;
+            background-image: radial-gradient(circle at 10% 30%, #2a2a2a 1px, transparent 1px);
+            background-size: 14px 14px;
+        }
+
+        /* Pipeline page step cards - grayscale */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .pipeline-card {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 1.5rem;
+            padding: 1.6rem;
+            border: 1px solid #2b2b2b;
+            transition: 0.2s;
+        }
+        .pipeline-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffffff66;
+            background: #0a0a0a;
+        }
+        .tool-icons i {
+            font-size: 1.7rem;
+            margin-right: 0.8rem;
+            color: #c0c0c0;
+        }
+        .pipeline-card h3 {
+            color: #f0f0f0;
+        }
+        .pipeline-card p {
+            color: #ababab;
+        }
+
+        /* Contact page - black & white */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        .contact-info, .form-container {
+            flex: 1;
+            background: #0a0a0ab3;
+            padding: 2rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid #2a2a2a;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .social-links a {
+            color: #cfcfcf;
+            font-size: 1.8rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+        input, select, textarea {
+            width: 100%;
+            background: #111111;
+            border: 1px solid #333333;
+            padding: 0.9rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-family: inherit;
+        }
+        button[type="submit"] {
+            background: #2c2c2c;
+            color: white;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: #4f4f4f;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #222222;
+            font-size: 0.8rem;
+            color: #7e7e7e;
+        }
+        @media (max-width: 800px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #000000e6;
+                backdrop-filter: blur(20px);
+                padding: 2rem;
+                gap: 1.5rem;
+                text-align: center;
+                z-index: 99;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+        .fade-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.7s ease;
+        }
+        .fade-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar">
-  <div class="logo">HRXQA STUDIO</div>
-  <div class="nav-links">
-    <a href="index.html">HOME</a>
-    <a href="project.html">PROJECTS</a>
-    <a href="contact.html">CONTACT</a>
-    <a href="apply.html" style="background: rgba(255,255,255,0.08); padding: 0.3rem 0.8rem; border-radius: 40px;">APPLY</a>
-  </div>
-</nav>
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-logo">HRXQA</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+    <div style="margin-top:16px; font-size:12px; letter-spacing:2px; color:#aaa;">CINEMATIC STUDIO</div>
+</div>
 
-<section class="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-content">
-    <h1>HRXQA Studio</h1>
-    <div class="hero-sub">3D Artist • Visual Creator • Animation Studio</div>
-    <div class="hero-description">
-      HRXQA Studio is a personal 3D creative space focused on modeling, animation, and cinematic visual storytelling. 
-      We create digital worlds, characters, and high-quality renders with a strong visual identity.
+<div class="app">
+    <nav>
+        <div class="logo" data-nav="home">HRXQA STUDIO</div>
+        <div class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="navLinks">
+            <li data-nav="home" class="active">HOME</li>
+            <li data-nav="projects">STUDIO PRODUCTIONS</li>
+            <li data-nav="pipeline">PIPELINE</li>
+            <li data-nav="contact">CONTACT / APPLY</li>
+        </ul>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active-page">
+        <div class="hero-section">
+            <canvas id="three-canvas-bg"></canvas>
+            <div class="hero-content">
+                <h1>HRXQA Studio</h1>
+                <div class="hero-sub">3D Animation • Cinematic Worlds • Visual Storytelling</div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" data-nav="projects">View Work</button>
+                    <button class="btn btn-outline" data-nav="pipeline">Production Pipeline</button>
+                    <button class="btn btn-outline" data-nav="contact">Contact / Collaborate</button>
+                </div>
+            </div>
+        </div>
+        <div class="section-container fade-scroll">
+            <div class="section-title">STUDIO IDENTITY</div>
+            <p class="intro-text">HRXQA Studio is a 3D animation and cinematic production studio focused on creating high-quality visual storytelling through modeling, animation, and environment design. Built on Blender & Maya workflows, we craft immersive worlds and character-driven narratives.</p>
+        </div>
+        <div class="section-container fade-scroll">
+            <div class="section-title">FEATURED WORK</div>
+            <div class="featured-grid">
+                <div class="feat-card"><div class="feat-img"><i class="fas fa-user-astronaut" style="font-size: 4rem;"></i></div><h3>Character Animation</h3><p>Emotive performance / Creature rigs</p></div>
+                <div class="feat-card"><div class="feat-img"><i class="fas fa-mountain" style="font-size: 4rem;"></i></div><h3>Environment Render</h3><p>Atmospheric world-building</p></div>
+                <div class="feat-card"><div class="feat-img"><i class="fas fa-film" style="font-size: 4rem;"></i></div><h3>Cinematic Shot</h3><p>Story-driven VFX sequences</p></div>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
-<footer>
-  <span>All rights reserved © 2026 HRXQA Studio</span>
-</footer>
 
-<script>
-  (function() {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    let ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    const PARTICLE_COUNT = 80;
+    <!-- STUDIO PRODUCTIONS PAGE (Projects) -->
+    <div id="projects-page" class="page">
+        <div class="section-container">
+            <div class="section-title">STUDIO PRODUCTIONS — CASE STUDIES</div>
+            <!-- project 1 -->
+            <div class="project-block fade-scroll">
+                <div class="project-title">CHRONOS FRACTURE</div>
+                <div class="project-meta"><span>Category: Cinematic / VFX</span><span>Software: Blender, Maya, Substance Painter, After Effects</span></div>
+                <div class="breakdown-grid">
+                    <div class="break-item"><h4><i class="fas fa-pencil-ruler"></i> Concept & Planning</h4><p>Thumbnail sketches & storyboard: time-warped city</p><div class="img-mock"><i class="fas fa-image"></i> concept art mockup</div></div>
+                    <div class="break-item"><h4><i class="fas fa-cube"></i> Modeling</h4><p>High-poly assets, modular environments</p><div class="img-mock"><i class="fas fa-shapes"></i> wireframe preview</div></div>
+                    <div class="break-item"><h4><i class="fas fa-palette"></i> Texturing</h4><p>Substance Painter & PBR materials</p><div class="img-mock"><i class="fas fa-fill-drip"></i> texture maps</div></div>
+                    <div class="break-item"><h4><i class="fas fa-bone"></i> Rigging</h4><p>Advanced facial rig, muscle system</p><div class="img-mock"><i class="fas fa-robot"></i> rig controls</div></div>
+                    <div class="break-item"><h4><i class="fas fa-person-walking"></i> Animation</h4><p>Keyframe action & mocap integration</p><div class="img-mock"><i class="fas fa-play"></i> animation clip preview</div></div>
+                    <div class="break-item"><h4><i class="fas fa-lightbulb"></i> Lighting & Rendering</h4><p>Cinematic light rig, Arnold/Cycles</p><div class="img-mock"><i class="fas fa-sun"></i> final render passes</div></div>
+                </div>
+                <div style="margin-top:1.2rem; color:#ccc;"><strong>Final Output:</strong> 4K cinematic trailer, awarded at indie animation festival.</div>
+            </div>
+            <!-- project 2 -->
+            <div class="project-block fade-scroll">
+                <div class="project-title">FORGOTTEN REALM (ENVIRONMENT)</div>
+                <div class="project-meta"><span>Category: Environment / Worldbuilding</span><span>Software: Maya, Blender, World Creator, Nuke</span></div>
+                <div class="breakdown-grid">
+                    <div class="break-item"><h4>Concept & Planning</h4><p>Moodboards & photogrammetry references</p><div class="img-mock">concept art</div></div>
+                    <div class="break-item"><h4>Modeling</h4><p>Modular ruin set & terrain sculpt</p><div class="img-mock">clay render</div></div>
+                    <div class="break-item"><h4>Texturing</h4><p>Trim sheets & blend materials</p><div class="img-mock">UV layout</div></div>
+                    <div class="break-item"><h4>Animation</h4><p>Atmospheric foliage & wind cycles</p><div class="img-mock">loop simulation</div></div>
+                    <div class="break-item"><h4>Lighting & Rendering</h4><p>Volumetric fog, god rays</p><div class="img-mock">beauty shot</div></div>
+                    <div class="break-item"><h4>Final Output</h4><p>Interactive 360° environment reel</p><div class="img-mock">output</div></div>
+                </div>
+            </div>
+            <!-- project 3 -->
+            <div class="project-block fade-scroll">
+                <div class="project-title">MECH: REBIRTH (Character / VFX)</div>
+                <div class="project-meta"><span>Category: Character / Cinematic</span><span>Software: Maya, ZBrush, Blender, After Effects</span></div>
+                <div class="breakdown-grid">
+                    <div class="break-item"><h4>Concept & Planning</h4><p>Cybernetic hero design bible</p><div class="img-mock">turnaround sheets</div></div>
+                    <div class="break-item"><h4>Modeling & Sculpt</h4><p>High-res ZBrush + hard surface retopo</p><div class="img-mock">wireframe</div></div>
+                    <div class="break-item"><h4>Rigging</h4><p>Custom mechanical joints & IK</p><div class="img-mock">rig demo</div></div>
+                    <div class="break-item"><h4>Animation</h4><p>Action combat sequences</p><div class="img-mock">animation timeline</div></div>
+                    <div class="break-item"><h4>Lighting & Compositing</h4><p>Nuke composite, lens effects</p><div class="img-mock">composite pass</div></div>
+                    <div class="break-item"><h4>Final Output</h4><p>Full cinematic teaser (4K)</p><div class="img-mock">final render</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    class Particle {
-      constructor(x, y, radius, speedX, speedY, color) {
-        this.x = x; this.y = y; this.radius = radius;
-        this.speedX = speedX; this.speedY = speedY; this.color = color;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 6;
-        ctx.shadowColor = `rgba(100, 150, 255, 0.4)`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < -30) this.x = width + 30;
-        if (this.x > width + 30) this.x = -30;
-        if (this.y < -30) this.y = height + 30;
-        if (this.y > height + 30) this.y = -30;
-      }
+    <!-- PIPELINE PAGE -->
+    <div id="pipeline-page" class="page">
+        <div class="section-container">
+            <div class="section-title">Production Pipeline — HRXQA Studio</div>
+            <div class="pipeline-grid">
+                <div class="pipeline-card"><div class="tool-icons"><i class="fab fa-bluetooth-b"></i><i class="fas fa-brain"></i></div><h3>Concept Development</h3><p>Moodboards, storyboards & art direction</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-cubes"></i><i class="fab fa-blender"></i><i class="fab fa-mix"></i></div><h3>Asset Creation (Blender/Maya)</h3><p>Blockout & high-poly modeling</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-sculpture"></i></div><h3>Sculpting & Modeling</h3><p>ZBrush & retopology stage</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-map"></i></div><h3>UV Mapping & Texturing</h3><p>Substance Painter / Mari PBR</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-robot"></i></div><h3>Rigging & Character Setup</h3><p>Custom controllers & skinning</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-running"></i></div><h3>Animation (Keyframe / Mocap)</h3><p>MotionBuilder, Maya keyframe polish</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-sun"></i><i class="fas fa-chalkboard"></i></div><h3>Lighting & Rendering</h3><p>Cycles / Arnold / Redshift</p></div>
+                <div class="pipeline-card"><div class="tool-icons"><i class="fas fa-film"></i><i class="fas fa-magic"></i></div><h3>Compositing & Post-Production</h3><p>Nuke, After Effects, color grading</p></div>
+            </div>
+            <div class="intro-text" style="margin-top:3rem; text-align:center;">End-to-end cinematic pipeline — delivering immersive worlds frame by frame.</div>
+        </div>
+    </div>
+
+    <!-- CONTACT / APPLY PAGE -->
+    <div id="contact-page" class="page">
+        <div class="section-container">
+            <div class="section-title">Collaborate & Join</div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3><i class="fas fa-envelope"></i> Contact</h3>
+                    <p style="margin: 1rem 0;">hrxqastudio@gmail.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-artstation"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <p style="margin-top: 2rem;">@hrxqastudio on all platforms</p>
+                    <div style="margin-top: 2rem; border-top: 1px solid #2a2a2a; padding-top:1.5rem;"><strong>Join HRXQA Studio</strong><br/>Collaborate on cinematic 3D projects, animations, and visual storytelling.</div>
+                </div>
+                <div class="form-container">
+                    <form id="collabForm">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="text" placeholder="Portfolio / Website Link">
+                        <select required>
+                            <option value="">Select Role</option>
+                            <option>Animator</option><option>Modeler</option><option>Rigger</option><option>VFX</option><option>General</option>
+                        </select>
+                        <textarea rows="4" placeholder="Tell us about your vision..."></textarea>
+                        <button type="submit">Submit Collaboration <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>© 2025 HRXQA STUDIO — Cinematic 3D Worlds | Blender + Maya Pipeline | Black & White Aesthetic</footer>
+</div>
+
+<script type="module">
+    import * as THREE from 'three';
+    // THREE.JS GRAYSCALE CINEMATIC BACKGROUND
+    const canvas = document.getElementById('three-canvas-bg');
+    if(canvas) {
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 1, 8);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // floating particles (white/gray)
+        const particleGeo = new THREE.BufferGeometry();
+        const particleCount = 1600;
+        const positions = new Float32Array(particleCount * 3);
+        for(let i=0; i<particleCount; i++) {
+            positions[i*3] = (Math.random() - 0.5) * 40;
+            positions[i*3+1] = (Math.random() - 0.5) * 20;
+            positions[i*3+2] = (Math.random() - 0.5) * 25 - 15;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({ color: 0xaaaaaa, size: 0.08, transparent: true, opacity: 0.45 });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+        
+        const torusKnotGeo = new THREE.TorusKnotGeometry(1.2, 0.28, 180, 24, 3, 4);
+        const knotMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, emissive: 0x222222, wireframe: true, roughness: 0.4, metalness: 0.8 });
+        const knot = new THREE.Mesh(torusKnotGeo, knotMat);
+        scene.add(knot);
+        knot.position.y = -0.3;
+        
+        const ambientLight = new THREE.AmbientLight(0x222222);
+        scene.add(ambientLight);
+        const light1 = new THREE.PointLight(0xffffff, 0.7);
+        light1.position.set(2,3,4);
+        scene.add(light1);
+        const light2 = new THREE.PointLight(0xaaaaaa, 0.5);
+        light2.position.set(-2,1,5);
+        scene.add(light2);
+        
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.005;
+            knot.rotation.x = time * 0.3;
+            knot.rotation.y = time * 0.5;
+            particles.rotation.y = time * 0.02;
+            particles.rotation.x = Math.sin(time * 0.1) * 0.1;
+            camera.position.z = 8 + Math.sin(time * 0.2) * 0.1;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     }
-
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        let radius = Math.random() * 2.2 + 0.8;
-        let x = Math.random() * width;
-        let y = Math.random() * height;
-        let speedX = (Math.random() - 0.5) * 0.35;
-        let speedY = (Math.random() - 0.5) * 0.3;
-        let alpha = Math.random() * 0.5 + 0.2;
-        let color = `rgba(140, 190, 255, ${alpha})`;
-        particles.push(new Particle(x, y, radius, speedX, speedY, color));
-      }
-      for (let i = 0; i < 30; i++) {
-        let radius = Math.random() * 3.5 + 1;
-        let x = Math.random() * width;
-        let y = Math.random() * height;
-        let speedX = (Math.random() - 0.5) * 0.2;
-        let speedY = (Math.random() - 0.5) * 0.2;
-        let color = `rgba(200, 210, 255, ${Math.random() * 0.3 + 0.1})`;
-        particles.push(new Particle(x, y, radius, speedX, speedY, color));
-      }
+    
+    // Loading transition
+    const loader = document.getElementById('loadingScreen');
+    window.addEventListener('load', () => {
+        setTimeout(() => { if(loader) loader.classList.add('fade-out'); }, 800);
+        setTimeout(() => { if(loader) loader.style.display = 'none'; }, 2000);
+    });
+    
+    // Navigation logic
+    const pages = {
+        home: document.getElementById('home-page'),
+        projects: document.getElementById('projects-page'),
+        pipeline: document.getElementById('pipeline-page'),
+        contact: document.getElementById('contact-page')
+    };
+    const navItems = document.querySelectorAll('[data-nav]');
+    function setActivePage(pageId) {
+        Object.keys(pages).forEach(key => { pages[key].classList.remove('active-page'); });
+        pages[pageId].classList.add('active-page');
+        document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+        const activeNav = document.querySelector(`[data-nav="${pageId}"]`);
+        if(activeNav && activeNav.tagName === 'LI') activeNav.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function drawBackground() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = '#02020A';
-      ctx.fillRect(0, 0, width, height);
-      for (let p of particles) {
-        p.draw();
-        p.update();
-      }
-      requestAnimationFrame(drawBackground);
-    }
-
-    function resizeCanvas() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      initParticles();
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    drawBackground();
-  })();
+    navItems.forEach(el => {
+        el.addEventListener('click', (e) => {
+            const page = el.getAttribute('data-nav');
+            if(page && pages[page]) setActivePage(page);
+            if(document.getElementById('navLinks').classList.contains('mobile-open')) 
+                document.getElementById('navLinks').classList.remove('mobile-open');
+        });
+    });
+    // mobile menu toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navList = document.getElementById('navLinks');
+    mobileBtn?.addEventListener('click', () => navList.classList.toggle('mobile-open'));
+    
+    // scroll fade observer
+    const faders = document.querySelectorAll('.fade-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.15 });
+    faders.forEach(el => observer.observe(el));
+    
+    // form submission
+    const form = document.getElementById('collabForm');
+    form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('✓ Message received. HRXQA Studio will review your collaboration request.');
+        form.reset();
+    });
+    
+    // active default
+    if(!document.querySelector('.nav-links .active') && pages.home) setActivePage('home');
 </script>
 </body>
 </html>
